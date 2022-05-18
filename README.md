@@ -1,22 +1,22 @@
 # domasna
 ## PRVA ZADACA
-Create a class `DN11`(in a file `DN11.java`) and a method in it `main()`.
+Create a class `DN11`(in a file `DN11.java`) and a method in it `main()`.  **zavrseno**
 
 ## Network presentation classes
-Write the class `Vozlisce` that represents the node (point) on the map. Each node should contain information about its y and x coordinates (types `double`), which will be determined as the latitude and longitude of the geographical point in decimal degrees (eg 46.050389 and 14.468778).
+Write the class `Vozlisce` that represents the node (point) on the map. Each node should contain information about its y and x coordinates (types `double`), which will be determined as the latitude and longitude of the geographical point in decimal degrees (eg 46.050389 and 14.468778). **zavrseno**
 
-Write a class `Cesta` that will represent the road between the two nodes. As an attribute, it should contain both nodes that connect them (type `Vozlisce`). In addition, it should contain information on the maximum permitted road speed (type `int`). In `Vozlisce` Add a list of roads `List<Cesta> ceste` that will include all the roads that connect this node to neighboring nodes. When creating a type object `Vozlisce`, the list of roads should be empty. In `Vozlisce` also add a method `dodajCesto(Cesta cesta)` that adds the road to the list of connected roads.
+Write a class `Cesta` that will represent the road between the two nodes. As an attribute, it should contain both nodes that connect them (type `Vozlisce`). In addition, it should contain information on the maximum permitted road speed (type `int`). In `Vozlisce` Add a list of roads `List<Cesta> ceste` that will include all the roads that connect this node to neighboring nodes. When creating a type object `Vozlisce`, the list of roads should be empty. In `Vozlisce` also add a method `dodajCesto(Cesta cesta)` that adds the road to the list of connected roads. **METODA DODAJ CESTO DA SE NAPRAVI**
 
-Add class `Kraj` and `Crpalka`, class extension `Vozlisce`. `Kraj` should additionally contain information on the name of the place (type `String`) `Crpalka` information on the prices of one liter of 95-octane petrol and diesel (type `double`).
+Add class `Kraj` and `Crpalka`, class extension `Vozlisce`. `Kraj` should additionally contain information on the name of the place (type `String`) `Crpalka` information on the prices of one liter of 95-octane petrol and diesel (type `double`). **zavrseno**
 
-Write another class `CestnoOmrezje` that will represent the entire road network. It should contain an attribute `Vozlisce[] vozlisca` that will contain all nodes and an attribute `Cesta[] ceste` that will contain all roads in the network.
+Write another class `CestnoOmrezje` that will represent the entire road network. It should contain an attribute `Vozlisce[] vozlisca` that will contain all nodes and an attribute `Cesta[] ceste` that will contain all roads in the network. **zavrseno**
 
 Attributes of all classes should be private, and you can add getter and setter methods to access them as needed. Also add appropriate constructors to set attribute values. If necessary, you can add other attributes to the task.
-Tip: To help you solve some tasks, you can add an attribute to the class  `int id` that will hold the node index.
+Tip: To help you solve some tasks, you can add an attribute to the class  `int id` that will hold the node index. **zavrseno**
   
 ## Reading data
 
-Add a static method to the class `CestnoOmrezje` `CestnoOmrezje izDatoteke(String imeDatoteke)` to read the road network from the file ( example_network.txt ). The method should return an object of type `CestnoOmrezje` that contains nodes and roads as specified in the file.
+Add a static method to the class `CestnoOmrezje` `CestnoOmrezje izDatoteke(String imeDatoteke)` to read the road network from the file ( example_network.txt ). The method should return an object of type `CestnoOmrezje` that contains nodes and roads as specified in the file. **TUKA SME**
 
 The file in the first line contains the number of nodes N and the number of roads M separated by a space. Followed by N lines with descriptions of individual nodes. This is followed by M lines with road data.
 Node data is as follows:
@@ -40,7 +40,7 @@ Road data are in the following forms:
 The nodes are given as indexes of the nodes given in the first part of the file (eg index 0 means the first node and so on). Based on this data, create a type object accordingly Cesta. Remember to add roads to both nodes by method `dodajCesto()`.
 
 ## Road list
-Add a method to the class `Cesta` `double getDolzina()` that returns the length of the road in kilometers. Calculate it from the coordinates of the nodes. Take into account the simplified formula, which is an approximation for our places: one angular degree of latitude corresponds to 111.12 km and one angular degree of longitude corresponds to 77.4 km.
+Add a method to the class `Cesta` `double getDolzina()` that returns the length of the road in kilometers. Calculate it from the coordinates of the nodes. Take into account the simplified formula, which is an approximation for our places: one angular degree of latitude corresponds to 111.12 km and one angular degree of longitude corresponds to 77.4 km. **POCNATO**
 
 Also, implement in class the method `toString()` to represent the road with a set of shapes, as in the following example:
 
