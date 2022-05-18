@@ -10,6 +10,7 @@ public class DN11 {
     }
 }
 
+// CLASA VOZLISCE, x i y koordinati i id
 class Vozlisce {
     private int id;
     private double x;
@@ -22,6 +23,7 @@ class Vozlisce {
     }
 }
 
+// CLASA KRAJ, x i y koordinati i id + ime na grad
 class Kraj extends Vozlisce {
     private String kraj;
 
@@ -31,6 +33,7 @@ class Kraj extends Vozlisce {
     }
 }
 
+// CLASA CRPALKA, x i y koordinati i id + cena na benzin i dizel
 class Crpalka extends Vozlisce {
     private double cena_b;
     private double cena_d;
@@ -42,6 +45,7 @@ class Crpalka extends Vozlisce {
     }
 }
 
+// CLASA CESTA, pocetna tocka i krajna tocka (VOZLISCE), maksimalna brzina i lista na ulici koi se povrzuvaat so nea odnosno so tockite
 class Cesta {
     private Vozlisce a;
     private Vozlisce b;
@@ -54,22 +58,25 @@ class Cesta {
         this.max_brzina = max_brzina;
         this.ceste = new ArrayList<Cesta>();
     }
-
+    
+    // DODAJ ULICA KOJA SE POVRZUVA SO ISTITE TOCKI
     // dodajCesto(Cesta cesta) {
     //     return;
     // }
-
-    double getDolzina() {
-        // koren iz (((x1-x2)x 111.12)^2 +  ((y1-y2) x 77.4)^2)
+    
+    // ZEMI DOLZINA NA ULICATA, RASTOJANIE OD TOCKA1 DO TOCKA2
+    // double getDolzina() {
+    //     // koren iz (((x1-x2)x 111.12)^2 +  ((y1-y2) x 77.4)^2)
         
-        return Math.sqrt(((x1-x2)x 111.12)**2 +  ((y1-y2) x 77.4)**2);
-    }
+    //     return Math.sqrt(((x1-x2)x 111.12)**2 +  ((y1-y2) x 77.4)**2);
+    // }
 
+    // ISPECATI -> Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
     // toString(){
-    ////     Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
     // }
 }
 
+// KLASA CESTNOOMREZJE, LISTA NA VOZLISCE(TOCKI) I CESTI(ULICI)
 class CestnoOmrezje {
     private Vozlisce[] vozlisca;
     private Cesta[] ceste;
@@ -79,6 +86,7 @@ class CestnoOmrezje {
         this.ceste = ceste;
     }
 
+    // PROCITAJ OD TEXT FILE I NAPOLNI GI LISTITE, RETURN OBJEKT OD TIP CESTNOOMREZJE
     static CestnoOmrezje izDatoteke(String imeDatoteke) throws FileNotFoundException {
         CestnoOmrezje eden;
         File file = new File(imeDatoteke);
