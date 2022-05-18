@@ -22,10 +22,13 @@ The file in the first line contains the number of nodes N and the number of road
 Node data is as follows:
 
 `<node_type> <x_coordinate> <y_coordinate> <additional_data ...>`
+
 The node type is one of the values: node, location, or pump. Depending on the type of node, the data may contain additional information:
 
 `vozlisce <x_coordinate> <y_coordinate> `
+
 `kraj <x_coordinate> <y_coordinate> <ime_kraja> `
+
 `crpalka <x_coordinate> <y_coordinate> <cena_95> <cena_diezel>`
 
 Depending on the node type, create an object of the appropriate type ( `Vozlisce`,  `Kraj` or `Crpalka`) and save it in the node table.
