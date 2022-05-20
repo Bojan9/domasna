@@ -4,9 +4,12 @@ import java.util.*;
 
 public class DN11 {
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("-----");
-        CestnoOmrezje eden = CestnoOmrezje.izDatoteke("primer_omrezje.txt");
-        System.out.println(eden);
+        // System.out.println("-----");
+        // CestnoOmrezje eden = CestnoOmrezje.izDatoteke("primer_omrezje.txt");
+        // System.out.println(eden);
+        // if (args[0].equals("ceste")){
+        //     CestnoOmrezje.izDatoteke(args[1]);
+        // }
     }
 }
 
@@ -18,10 +21,34 @@ class Vozlisce {
     private List<Cesta> ceste;
 
     Vozlisce(int id, double x, double y) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
+        this.setID(id);;
+        this.setX(x);
+        this.setY(y);
         this.ceste = new ArrayList<Cesta>();
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     // DODAJ ULICA KOJA SE POVRZUVA SO ISTITE TOCKI
@@ -67,16 +94,18 @@ class Cesta {
     
     // ZEMI DOLZINA NA ULICATA, RASTOJANIE OD TOCKA1 DO TOCKA2
     double getDolzina() {
-        x1 = a.x;
-        x2 = b.x;
-        y1 = a.y;
-        y2 = b.y;
-        return Math.sqrt(((x1-x2)x 111.12)**2 +  ((y1-y2) x 77.4)**2);
+        double x1 = a.getX();
+        double x2 = b.getX();
+        double y1 = a.getY();
+        double y2 = b.getY();
+        return Math.sqrt(Math.pow(((x1-x2)* 111.12),2) + Math.pow(((y1-y2)* 77.4),2));
     }
 
     // ISPECATI -> Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
-    // toString(){
-    // }
+    public String toString(){
+        String eden = "Cesta " + "(" + a.getID() + "," + b.getID() + "): dolzina=" + getDolzina() + " km, omejitev=" + max_brzina + "km/h";
+        return eden;
+    }
 }
 
 // KLASA CESTNOOMREZJE, LISTA NA VOZLISCE(TOCKI) I CESTI(ULICI)
