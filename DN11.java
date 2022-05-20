@@ -10,6 +10,10 @@ public class DN11 {
         // if (args[0].equals("ceste")){
         //     CestnoOmrezje.izDatoteke(args[1]);
         // }
+        Vozlisce eden = new Vozlisce(1, 46.03842071404752, 14.450154140051565);
+        Vozlisce dva = new Vozlisce(2, 46.07859107697171, 14.478231646215976);
+        Cesta ces = new Cesta(eden, dva, 110);
+        System.out.println(ces);
     }
 }
 
@@ -98,13 +102,12 @@ class Cesta {
         double x2 = b.getX();
         double y1 = a.getY();
         double y2 = b.getY();
-        return Math.sqrt(Math.pow(((x1-x2)* 111.12),2) + Math.pow(((y1-y2)* 77.4),2));
+        return Math.round(Math.sqrt(Math.pow(((x1-x2)* 111.12),2) + Math.pow(((y1-y2)* 77.4),2))*100)/100D;
     }
 
     // ISPECATI -> Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
     public String toString(){
-        String eden = "Cesta " + "(" + a.getID() + "," + b.getID() + "): dolzina=" + getDolzina() + " km, omejitev=" + max_brzina + "km/h";
-        return eden;
+        return "Cesta " + "(" + a.getID() + "," + b.getID() + "): dolzina=" + getDolzina() + " km, omejitev=" + max_brzina + " km/h";
     }
 }
 
