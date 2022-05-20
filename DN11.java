@@ -4,16 +4,10 @@ import java.util.*;
 
 public class DN11 {
     public static void main(String[] args) throws FileNotFoundException {
-        // System.out.println("-----");
-        // CestnoOmrezje eden = CestnoOmrezje.izDatoteke("primer_omrezje.txt");
-        // System.out.println(eden);
-        // if (args[0].equals("ceste")){
-        //     CestnoOmrezje.izDatoteke(args[1]);
-        // }
-        Vozlisce eden = new Vozlisce(1, 46.03842071404752, 14.450154140051565);
-        Vozlisce dva = new Vozlisce(2, 46.07859107697171, 14.478231646215976);
-        Cesta ces = new Cesta(eden, dva, 110);
-        System.out.println(ces);
+        if (args[0].equals("ceste")){
+            System.out.println("Omrezje vsebuje naslednje ceste:");
+            CestnoOmrezje.izDatoteke(args[1]);
+        }
     }
 }
 
@@ -102,12 +96,12 @@ class Cesta {
         double x2 = b.getX();
         double y1 = a.getY();
         double y2 = b.getY();
-        return Math.round(Math.sqrt(Math.pow(((x1-x2)* 111.12),2) + Math.pow(((y1-y2)* 77.4),2))*100)/100D;
+        return Math.sqrt(Math.pow(((x1-x2)* 111.12),2) + Math.pow(((y1-y2)* 77.4),2));
     }
 
     // ISPECATI -> Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
     public String toString(){
-        return "Cesta " + "(" + a.getID() + "," + b.getID() + "): dolzina=" + getDolzina() + " km, omejitev=" + max_brzina + " km/h";
+        return "Cesta " + "(" + a.getID() + "," + b.getID() + "): dolzina=" + String.format("%.2f", getDolzina()) + " km, omejitev=" + max_brzina + " km/h";
     }
 }
 
@@ -119,6 +113,12 @@ class CestnoOmrezje {
     CestnoOmrezje(Vozlisce[] vozlisca, Cesta[] ceste) {
         this.vozlisca = vozlisca;
         this.ceste = ceste;
+    }
+
+    void printCes(){
+        for(int i = 0; i < ceste.length; i++){
+            System.out.println(ceste[i]);
+        }
     }
 
     // PROCITAJ OD TEXT FILE I NAPOLNI GI LISTITE, RETURN OBJEKT OD TIP CESTNOOMREZJE
@@ -169,11 +169,15 @@ class CestnoOmrezje {
             int brzina = Integer.parseInt(d[2]);
 
             Cesta cesta = new Cesta(voz[voz_c_1], voz[voz_c_2], brzina);
-            // voz_c_1.dodajCesto(cesta);
+
+            // voz[voz_c_1].dodajCesto(cesta);
+            // voz[voz_c_2].dodajCesto(cesta);
+            
             cest[i] = cesta;
         }
           
-          CestnoOmrezje cest_omr = new CestnoOmrezje(voz, cest);
-          return cest_omr;
+        CestnoOmrezje cest_omr = new CestnoOmrezje(voz, cest);
+        cest_omr.printCes();
+        return cest_omr;
     }
 }
