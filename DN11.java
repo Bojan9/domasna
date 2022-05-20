@@ -6,7 +6,7 @@ public class DN11 {
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("-----");
         CestnoOmrezje eden = CestnoOmrezje.izDatoteke("primer_omrezje.txt");
-        System.out.println(CestnoOmrezje.izDatoteke("primer_omrezje.txt"));
+        System.out.println(eden);
     }
 }
 
@@ -15,11 +15,19 @@ class Vozlisce {
     private int id;
     private double x;
     private double y;
+    private List<Cesta> ceste;
 
     Vozlisce(int id, double x, double y) {
         this.id = id;
         this.x = x;
         this.y = y;
+        this.ceste = new ArrayList<Cesta>();
+    }
+
+    // DODAJ ULICA KOJA SE POVRZUVA SO ISTITE TOCKI
+    Cesta dodajCesto(Cesta cesta) {
+        ceste.add(cesta);
+        return (Cesta) ceste;
     }
 }
 
@@ -50,26 +58,21 @@ class Cesta {
     private Vozlisce a;
     private Vozlisce b;
     private int max_brzina;
-    private List<Cesta> ceste;
 
     Cesta(Vozlisce a, Vozlisce b, int max_brzina) {
         this.a = a;
         this.b = b;
         this.max_brzina = max_brzina;
-        this.ceste = new ArrayList<Cesta>();
     }
     
-    // DODAJ ULICA KOJA SE POVRZUVA SO ISTITE TOCKI
-    // dodajCesto(Cesta cesta) {
-    //     return;
-    // }
-    
     // ZEMI DOLZINA NA ULICATA, RASTOJANIE OD TOCKA1 DO TOCKA2
-    // double getDolzina() {
-    //     // koren iz (((x1-x2)x 111.12)^2 +  ((y1-y2) x 77.4)^2)
-        
-    //     return Math.sqrt(((x1-x2)x 111.12)**2 +  ((y1-y2) x 77.4)**2);
-    // }
+    double getDolzina() {
+        x1 = a.x;
+        x2 = b.x;
+        y1 = a.y;
+        y2 = b.y;
+        return Math.sqrt(((x1-x2)x 111.12)**2 +  ((y1-y2) x 77.4)**2);
+    }
 
     // ISPECATI -> Cesta (0,1): dolzina=17.70 km, omejitev=130 km/h
     // toString(){
@@ -88,35 +91,36 @@ class CestnoOmrezje {
 
     // PROCITAJ OD TEXT FILE I NAPOLNI GI LISTITE, RETURN OBJEKT OD TIP CESTNOOMREZJE
     static CestnoOmrezje izDatoteke(String imeDatoteke) throws FileNotFoundException {
-        CestnoOmrezje eden;
         File file = new File(imeDatoteke);
         Scanner scan = new Scanner(file);
 
         String prv = scan.nextLine();
-        String[] del = prv.split("");
+        String[] del = prv.split(" ");
         
         int br_voz = Integer.parseInt(del[0]);
         int br_pat = Integer.parseInt(del[1]);
 
-        // ArrayList<Vozlisce> voz = new ArrayList<Vozlisce>();
         Vozlisce[] voz = new Vozlisce[br_voz];
         Cesta[] cest = new Cesta[br_pat];
 
         for (int i = 0; i < br_voz; i++){
             String vrstica = scan.nextLine();
-            String[] d = vrstica.split("");
+            String[] d = vrstica.split(" ");
             
             double kor_x = Double.parseDouble(d[1]);
             double kor_y = Double.parseDouble(d[2]);
 
-            if (d[0] == "vozlisce") {
+            if (d[0].equals("vozlisce")) {
                 Vozlisce vozlisce = new Vozlisce(i, kor_x, kor_y);
                 voz[i] = vozlisce;
-            } else if (d[0] == "kraj") {
+            } else if (d[0].equals("kraj")) {
                 String ime_kraj = d[3];
+                if (d.length > 4){
+                    ime_kraj = ime_kraj + " " + d[4];
+                }
                 Kraj kraj = new Kraj(i, kor_x, kor_y, ime_kraj);
                 voz[i] = kraj;
-            } else if (d[0] == "crpalka") {
+            } else if (d[0].equals("crpalka")) {
                 double cena_b = Double.parseDouble(d[3]);
                 double cena_d = Double.parseDouble(d[4]);
                 Crpalka crpalka = new Crpalka(i, kor_x, kor_y, cena_b, cena_d);
@@ -126,19 +130,18 @@ class CestnoOmrezje {
 
         for (int i = 0; i < br_pat; i++) {
             String vrstica = scan.nextLine();
-            String[] d = vrstica.split("");
+            String[] d = vrstica.split(" ");
 
             int voz_c_1 = Integer.parseInt(d[0]);
             int voz_c_2 = Integer.parseInt(d[1]);
             int brzina = Integer.parseInt(d[2]);
 
             Cesta cesta = new Cesta(voz[voz_c_1], voz[voz_c_2], brzina);
+            // voz_c_1.dodajCesto(cesta);
             cest[i] = cesta;
         }
           
           CestnoOmrezje cest_omr = new CestnoOmrezje(voz, cest);
-          System.out.println("cest_omr");
           return cest_omr;
     }
 }
-
